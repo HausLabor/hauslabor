@@ -128,15 +128,7 @@ const personSchema = new mongoose.Schema({
     status: { type: Boolean, required: [true, 'Informe o Status!']} //Status True or False
 });
 //------- Pessoa
-//------- Estrutura de Usuários
-const userSchema = new mongoose.Schema({
-    name: { type: String, required: [true, 'Informe o Nome do Usuário!'] },
-    password: { type: String, min: 6, max: 12, required: [true, 'Informe a Senha do Usuário!']},
-    login: { type: String, required: false }, //Login GMail
-    access: { type: Number, min: 1, max: 4, required: [true, 'Informe o nivel de acesso do Usuário!']}, //Type 1 - PACIENTE / 2 - ESPECIALISTA / 3 - HARDWARE / 4 - ADMINISTRADOR 
-    person: personSchema,
-    status: { type: Boolean, required: [true, 'Informe o status do Usuário!']} //Status True or False
-});
-//------- Usuários
 
-module.exports = restful.model('User', userSchema);
+module.exports = function(userID) {
+    return restful.model('Person', personSchema, userID);
+}
