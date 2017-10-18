@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="hauslabor" lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>HausLabor</title>
+        <link rel="stylesheet" href="/assets/css/deps.min.css">
+        <link rel="stylesheet" href="/assets/css/app.min.css">
+    </head>
+    <body class="skin-blue fixed sidebar-mini">
+        <div class="wrapper">
+            <header class="main-header" ng-include="'/template/header.html'"></header>
+            <aside class="main-sidebar" ng-include="'/template/menu.html'"></aside>
+            <div class="content-wrapper" ui-view></div>
+            <footer class="main-footer" ng-include="'/template/footer.html'"></footer>
+        </div>
+        <script src="/assets/js/deps.min.js"></script>
+        <script src="/assets/js/app.min.js"></script>
+    </body>
+</html>
