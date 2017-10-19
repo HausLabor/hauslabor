@@ -1,1 +1,34 @@
-<h1>Exames</h1>
+<content-header name="Exames" small="Cadastro"></content-header>
+
+<section class="content">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+            <li>
+                <a href data-target="#tabList" data-toggle="tab">
+                    <i class="fa fa-bars"></i> Lista
+                </a>
+            </li>
+            <li>
+                <a href data-target="#tabCreate" data-toggle="tab">
+                    <i class="fa fa-plus"></i> Incluir
+                </a>
+            </li>
+            <li>
+                <a href data-target="#tabUpdate" data-toggle="tab">
+                    <i class="fa fa-pencil"></i> Alterar
+                </a>
+            </li>
+            <li>
+                <a href data-target="#tabDelete" data-toggle="tab">
+                    <i class="fa fa-trash-o"></i> Excluir
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" id="tabList" ng-include="'exames/list.html'"></div>
+            <div class="tab-pane" id="tabCreate" ng-include="'exames/form.html'"></div>
+            <div class="tab-pane" id="tabUpdate" ng-include="'exames/form.html'"></div>
+            <div class="tab-pane" id="tabDelete" ng-include="'exames/form.html'"></div>
+        </div>
+    </div>
+</section>

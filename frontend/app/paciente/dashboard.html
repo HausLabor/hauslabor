@@ -1,18 +1,10 @@
-<section class="content-header">
-    <h1>Dashboard Paciente <small>Versão 1.0</small></h1>
-</section>
+<content-header name="Dashboard Paciente" small="Versão 1.1"></content-header>
 
-<section class="content">
-    <div class="col-xs-2">
-        <div class="small-box bg-blue">
-            <div class="inner">
-                <h3>00.0</h3>
-                <p>IMC</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-bar-chart-o"></i>
-            </div>
-
-        </div>
-    </div>
+<section class="content" ng-controller="DashboardCtrl as dashboard">
+    <value-box grid="4" color-class="bg-green" icon-class="fa-bar-chart-o"
+        value= "{{ dashboard.weight | number: 2 }}" text="Peso"></value-box>
+    <value-box grid="4" color-class="bg-green" icon-class="fa-bar-chart-o"
+        value= "{{ dashboard.height | number: 2 }}" text="Altura"></value-box>
+    <value-box grid="4" color-class="bg-blue" icon-class="fa-bar-chart-o"
+        value= "{{ dashboard.imc | number: 2 }}" text="IMC"></value-box>
 </section>

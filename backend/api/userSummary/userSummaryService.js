@@ -1,10 +1,12 @@
 const _ = require('lodash');
-const User = require('../user/user');
+const Person = require('../person/person');
+
+const userID = 'users';
 
 //Funcao middleware
 function getSummary(req, res) {
     var imc;
-    User.aggregate({
+    Person(userID).aggregate({
         //Precisa alterar para buscar um usuário e pegar o peso e altuar
         $project: { weight: {$sum: "$person.patient.weight"}, height: {$sum: "$person.patient.height"}}
     },{
