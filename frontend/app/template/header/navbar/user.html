@@ -1,15 +1,16 @@
 <a href class="dropdown-toggle" data-toggle="dropdown">
-<img src="/assets/imgs/user.jpg" class="user-image" alt="User Image">
+<img src="/assets/imgs/user.png" class="user-image" alt="User Image">
 <span class="hidden-xs">{{:: auth.getUser().name }}</span>
 </a>
+
 <ul class="dropdown-menu">
   <!-- User image -->
   <li class="user-header">
-    <img src="/assets/imgs/user.jpg" class="img-circle" alt="User Image">
+    <img src="/assets/imgs/user.png" class="img-circle" alt="User Image">
     <p>
       {{:: auth.getUser().name }}
-      <small>{{:: auth.getUser.email }}</small>
-      <small>{{:: auth.getUser.ultAccess }}</small>
+      <small>{{:: auth.getUser().email }}</small>
+      <small>Ultimo acesso: {{:: auth.getUser().lastacess | date:'medium' }}</small>
     </p>
   </li>
   <!-- Menu Body -->
@@ -23,10 +24,10 @@
   <!-- Menu Footer-->
   <li class="user-footer">
     <div class="pull-left">
-      <a href class="btn btn-default btn-flat">Perfil</a>
+      <a href class="btn btn-default btn-flat" ng-click="auth.perfil()">Perfil</a>
     </div>
     <div class="pull-right">
-      <a href class="btn btn-default btn-flat">Sair</a>
+      <a href class="btn btn-default btn-flat" ng-click="auth.logout()">Sair</a>
     </div>
   </li>
 </ul>

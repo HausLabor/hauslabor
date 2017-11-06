@@ -1,12 +1,61 @@
 <div role="form">
-    <div class="box-body">
-        <field id="name" label="Nome" grid="12 6 4" placeholder="Informe o Nome"></field>
+   <div class="col-md-12">
+    <div class="col-md-12">
+        <div class="box-body">
+            <input type="text" class="form-control" placeholder="ID Exam" ng-model="eCtrl.exam._id" disabled ng-hide="true">
+            <div class="col-sm-12 col-lg-4">
+                <div class="form-group">
+                    <label for="examStatus">Tipo de Exame</label>
+                    <select class="form-control" ng-model="eCtrl.exam.typeExam" ng-disabled="eCtrl.tabDelete">
+                        <option>Glicose Sanguínea</option>
+                        <option>Colesterol</option>
+                        <option>Colesterol</option>
+                        <option>Triglicérol</option>
+                        <option>Lactato</option>
+                        <option>Pressão</option>
+                        <option>Comprimento</option>
+                        <option>Peso</option>
+                        <option>Outros</option>
+                    </select>
+                </div>
+            </div>
+            <field id="description" label="Descrição do Exame" grid="12 6 4" 
+            placeholder="Informe o Nome do Exame" model="eCtrl.exam.description" readonly="eCtrl.tabDelete"></field>
+            <field id="result" label="Resultado" grid="12 6 4" placeholder="Informe o Resultado" model="eCtrl.exam.result" readonly="eCtrl.tabDelete"></field>
+            <field id="lastActivity" label="Última Atividade" grid="12 6 4" placeholder="Última Atividade" model="eCtrl.exam.lastActivity"
+                readonly="eCtrl.tabDelete"></field>
+            <field id="date" label="Data/Hora" grid="12 6 4" placeholder="Data/Hora" model="eCtrl.exam.datehour" readonly="eCtrl.tabDelete"></field>
+            <field id="observation" label="Observação" grid="12 6 4" placeholder="Observação" model="eCtrl.exam.observation" readonly="eCtrl.tabDelete"></field>
+        </div>
     </div>
+    <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Nova Notificação</h3>
+                </div>
+                <div class="box-body">
+                        <textarea class="from-control" rows="3" ng-disabled="eCtrl.tabDelete" ng-model="eCtrl.notification.description"
+                        placeholder="Inserir uma nova notificação..." style="margin: 0px -0.5px 0px 0px; height: 74px; width: 508px;"></textarea>
+                </div>
+            </div>
+        </div>
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Notificações</h3>
+            </div>
+            <div class="box-body">
+                    <div ng-include="'/exames/listNote.html'"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    
     <div class="box-footer">
-        <button class="btn btn-primary">Incluir</button>
-        <button class="btn btn-info">Alterar</button>
-        <button class="btn btn-danger">Excluir</button>
-        <button class="btn btn-default">Cancelar</button>
-    </div> 
+        <button class="btn btn-primary" ng-if="eCtrl.tabCreate" ng-click="eCtrl.create()">Incluir</button>
+        <button class="btn btn-info" ng-if="eCtrl.tabUpdate" ng-click="eCtrl.update()">Alterar</button>
+        <button class="btn btn-danger" ng-if="eCtrl.tabDelete" ng-click="eCtrl.delete()">Excluir</button>
+        <button class="btn btn-default" ng-click="eCtrl.refresh()">Cancelar</button>
+    </div>
 
 </div>

@@ -1,0 +1,14 @@
+<div class="slimScrollDiv">
+    <div class="box-body chat" id="chat-box">
+        <!-- chat item -->
+        <div class="item" ng-repeat="note in eCtrl.exam.notification">
+            <img ng-src="/assets/imgs/{{note.type}}.png" alt="{{ note.type }}" >
+            <p class="message">
+                <a href="#" class="name">
+                    {{ note.name }}
+                </a>
+                {{ note.description }}
+            </p>
+        </div>
+    </div>
+</div>

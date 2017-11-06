@@ -1,1 +1,30 @@
-<h1>list</h1>
+<div class="box-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Resultado</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="exam in eCtrl.examsDB | filter: true as results">
+                    <td>{{:: exam.typeExam }}</td>
+                    <td>{{:: exam.description }}</td>
+                    <td>{{:: exam.result }}</td>
+                    <td>{{:: exam.status}}</td>
+                    <td class="table-actions">
+                        <button class="btn btn-warning" ng-click="eCtrl.showTabUpdate(exam)">
+                            <i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-danger" ng-click="eCtrl.showTabDelete(exam)">
+                            <i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="box-footer clearfix">
+            <paginator url="/#/exams" pages="{{ eCtrl.examPages}}"></paginator>
+        </div>
+    </div>

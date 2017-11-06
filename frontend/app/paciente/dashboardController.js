@@ -1,16 +1,18 @@
 (function(){
     angular.module('hauslabor').controller('DashboardCtrl', [
         '$http',
+        'auth',
         DashboardController
     ])
     
-    function DashboardController($http) {
+    function DashboardController($http, auth) {
         
         var vm = this;
-        
+        const user = auth.getUser();
+
         vm.getSummary = function() {
-            const url = 'http://localhost:3003/api/userSummary';
-            $http.get(url).then(function(response) {
+            const url = 'http://localhost:3003/api/personSummary';
+            $http.get(`${url}?email=${user.email}`).then(function(response) {
                 const {weight = 0, height = 0, imc = 0} = response.data;
                 vm.weight = weight;
                 vm.height = height;

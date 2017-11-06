@@ -1,0 +1,101 @@
+<div role="form">
+    <div class="box-body">
+        <div class="col-lg-12">
+            <div class="col-sm-12 col-lg-2">
+                <div class="form-group">
+                    <label for="personType">Tipo de Perfil</label>
+                        <select id="personType" class="form-control" ng-change="pCtrl.isSpecialist()" ng-model="pCtrl.person.type" ng-readonly="pCtrl.tabDelete"> 
+                            <option ng-repeat="selectType in pCtrl.personType" 
+                            ng-selected="pCtrl.person.type == selectType.value" 
+                            value="{{ selectType.value}}">{{ selectType.value}}</option>
+                        </select>
+                </div>
+            </div>
+            <field id="name" label="Nome" grid="12" placeholder="Informe o Nome" 
+                model="pCtrl.person.name" readonly="pCtrl.tabDelete"></field>
+            <field id="dtnasc" label="Data de Nascimento" grid="12 6 4" placeholder="Data de Nascimento" type="Date"
+                model="pCtrl.person.dtnasc" readonly="pCtrl.tabDelete"></field>
+            <div class="col-sm-12 col-lg-2">
+                <div class="form-group">
+                    <label for="personType">Sexo</label>
+                        <select class="form-control" ng-model="pCtrl.person.sex" ng-readonly="pCtrl.tabDelete">
+                            <option>FEMININO</option>
+                            <option>MASCULINO</option>
+                        </select>
+                </div>
+            </div>
+            <field id="birthplace" label="Nacionalidade" grid="12 6 4" placeholder="Informe a Nacionalidade" 
+                model="pCtrl.person.birthplace" readonly="pCtrl.tabDelete"></field>
+            <field id="weight" label="Peso" grid="12 6 4" placeholder="Informe o Peso em Kg" type="Number" 
+                model="pCtrl.patient.weight" readonly="pCtrl.tabDelete"></field>
+            <field id="height" label="Altura" grid="12 6 4" placeholder="Informe a Altura em Metro" type="Number"
+                model="pCtrl.patient.height" readonly="pCtrl.tabDelete"></field>
+            <field id="profession" label="Profissão" grid="12 6 4" placeholder="Informe a Profissão"
+                model="pCtrl.patient.profession" readonly="pCtrl.tabDelete"></field>
+            </div>
+
+        <div class="col-lg-12">
+            <field id="rg" label="RG" grid="12 6 4" placeholder="Informe o RG" model="pCtrl.person.documents.rg" readonly="pCtrl.tabDelete"></field>
+            <field id="cpf" label="CPF" grid="12 6 4" placeholder="Informe o CPF" model="pCtrl.person.documents.cpf" readonly="pCtrl.tabDelete"></field>
+            <div class="col-lg-12" ng-if="pCtrl.specialistDocs">
+                <field id="type" label="Tipo de Especialista" grid="12 6 4" placeholder="Biomédico Médico Enfermeiro Outros" model="pCtrl.person.documents.docSpecialist.type" readonly="pCtrl.tabDelete"></field>
+                <field id="restration" label="Número do Registro" grid="12 6 4" placeholder="Informe o número do Registro" model="pCtrl.person.documents.docSpecialist.registration" readonly="pCtrl.tabDelete"></field>
+                <field id="specialist" label="Especialidade" grid="12 6 4" placeholder="Informe a Especialidade" model="pCtrl.person.documents.docSpecialist.specialist" readonly="pCtrl.tabDelete"></field>
+            </div>
+        </div>
+        <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Contatos</legend>
+                    <div ng-include="'/person/listContact.html'"></div>
+                </fieldset>
+        </div>
+        <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Endereço</legend>
+                    <div ng-include="'/person/listAddress.html'"></div>
+                </fieldset>
+        </div>
+        <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Atividades Fisica</legend>
+                    <div ng-include="'/person/listPhysicalActivity.html'"></div>
+                </fieldset>
+        </div>
+
+        <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Medicamentos</legend>
+                    <div ng-include="'/person/listDrug.html'"></div>
+                </fieldset>
+        </div>
+        <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Doenças</legend>
+                    <div ng-include="'/person/listIllness.html'"></div>
+                </fieldset>
+        </div>
+        <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Cirugias</legend>
+                    <div ng-include="'/person/listSurgery.html'"></div>
+                </fieldset>
+        </div>
+        <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Vicíos</legend>
+                    <div ng-include="'/person/listAddiction.html'"></div>
+                </fieldset>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button class="btn btn-primary" ng-if="pCtrl.tabCreate" 
+        ng-click="pCtrl.create()" >Incluir</button>
+        <button class="btn btn-info" ng-if="pCtrl.tabUpdate"
+        ng-click="pCtrl.update()" >Alterar</button>
+        <button class="btn btn-danger" ng-if="pCtrl.tabDelete" 
+        ng-click="pCtrl.delete()" >Excluir</button>
+        <button class="btn btn-default" 
+        ng-click="pCtrl.refresh()">Cancelar</button>
+    </div>
+
+</div>

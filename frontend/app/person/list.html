@@ -1,0 +1,28 @@
+<div class="box-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr nr-repeat="person in pCtrl.persons">
+                <td>{{:: pCtrl.persons.type }}</td>
+                <td>{{:: pCtrl.persons.name }}</td>
+                <td>{{:: pCtrl.persons.status}}</td>
+                <td class="table-actions">
+                    <button class="btn btn-warning" ng-click="pCtrl.showTabUpdate(pCtrl.persons)">
+                        <i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-danger" ng-click="pCtrl.showTabDelete(pCtrl.persons)">
+                        <i class="fa fa-trash-o"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="box-footer clearfix">
+        <paginator url="/#/person" pages="{{ pCtrl.pages}}"></paginator>
+    </div>
+</div>

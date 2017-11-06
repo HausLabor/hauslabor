@@ -1,0 +1,46 @@
+<div class="col-xs-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Nome</th>
+                    <th>Observação</th>
+                    <th>Frequência</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="drug in pCtrl.patient.drugs">
+                    <td>
+                        <list-box id="drug.type" grid="12 6 4" values="FITOTERÁPICO ALOPÁTICO HOMEOPÁTICO SIMILAR GENÉRICO OUTROS" 
+                            model="drug.type" readonly="pCtrl.tabdelete"></list-box>
+                    </td>
+                    <td>
+                        <input ng-model="drug.description" class="form-control" placeholder="Informe o nome"
+                        ng-readonly="pCtrl.tabDelete" />
+                    </td>
+                    <td>
+                        <input ng-model="drug.observation" class="form-control" placeholder="Observação"
+                        ng-readonly="pCtrl.tabDelete" />
+                    </td>
+                    <td>
+                        <input ng-model="drug.othen" class="form-control" placeholder="1comp/3h, 2x/dia"
+                        ng-readonly="pCtrl.tabDelete" />
+                    </td>
+                    <td class="table-actions">
+                        <button class="btn btn-success" ng-disabled="pCtrl.tabDelete"  ng-click="pCtrl.addDrug($index)">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button class="btn btn-warning" ng-disabled="pCtrl.tabDelete"  ng-click="pCtrl.cloneDrug($index, drug)">
+                            <i class="fa fa-clone" ></i>
+                        </button>
+                        <button class="btn btn-danger" ng-disabled="pCtrl.tabDelete"  ng-click="pCtrl.deleteDrug($index)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </td>
+                </tr>    
+            </tbody>
+        </table>
+    </div>
+    
