@@ -1,0 +1,15 @@
+{
+    "name": "jose.cana",
+    "password": "hashDoidão",
+    "email": "jose.cana@gmail.com",
+    "access": "1", //Type 1 - PACIENTE / 2 - ESPECIALISTA / 3 - HARDWARE / 4 - ADMINISTRADOR 
+    "lastacess": "2017-10-24",
+    /*"watchers": [
+        {
+            "email": "filha.jose.cana@gmail.com",
+            "password": "outroHashDoidão",
+            "status": true
+        }
+    ],*/
+    "status": true
+}

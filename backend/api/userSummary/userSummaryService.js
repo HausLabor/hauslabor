@@ -1,27 +1,40 @@
 const _ = require('lodash');
-const Person = require('../person/person');
+const User = require('../user/user');
 
-const userID = 'users';
-
-//Funcao middleware
-function getSummary(req, res) {
-    var imc;
-    Person(userID).aggregate({
-        //Precisa alterar para buscar um usuário e pegar o peso e altuar
-        $project: { weight: {$sum: "$person.patient.weight"}, height: {$sum: "$person.patient.height"}}
-    },{
-        $group: {_id: null, weight: {$sum: "$weight"} , height: {$sum: "$height"}}
-    },{
-        $project: {weight: "$weight", height: "$height", imc: {$divide: ["$weight", {$multiply: ["$height","$height"]}]}}
-    },{
-        $project: {_id: 0, height: 1, weight: 1, imc: 1}
-    }, function(error, result){
-       if(error) {
-           res.status(500).json({errors: [error]});
-       } else {
-           res.json(_.defaults(result[0], {height: 0, weight: 0, imc: 0}));
-       }
+function countUser(req, res) {
+    User.count(function (error, value) {
+        if (error) {
+            res.status(500).json({ errors: [error] });
+        } else {
+            res.json({ value });
+        }
     });
 }
 
-module.exports = { getSummary }
+const findUserID = (req, res, next) => {
+
+    const email = req.body.email || req.query.email || '';
+    const emailRegex = /\S+@\S+\.\S+/;//validar o e-mail
+
+    if (!email.match(emailRegex)) {
+        return res.status(400).send({
+            errors: ['O e-mail informado está inválido']
+        })
+    }
+    User.findOne({ email }, (err, user) => {
+        console.log('FindUserID');
+        //console.log(user);
+        if (err) {
+            return sendErrorsFromDB(res, err)
+        } else if (!user._id) {
+//            console.log(user);
+            return res.status(400).send({ errors: ['Falha na localização, contate um Administrador.'] })
+        } else {
+            console.log('FindOne: '+ user._id)
+            req.user = user;
+            return next();
+        }
+    });
+}
+
+module.exports = { countUser, findUserID }

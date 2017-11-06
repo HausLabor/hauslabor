@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 //const db_passwd = '1234';
 //const db_user = 'root';
 //const db_port = '27017';
+const db_local = 'localhost';
+const db_name = 'db_hauslabor';
 
-module.exports = mongoose.connect('mongodb://localhost/db_hauslabor', 
-{useMongoClient: true});
+
+module.exports = mongoose.connect(`mongodb://${db_local}/${db_name}`, {useMongoClient: true});
 //module.exports = mongoose.connect(`mongodb://${db_user}:${db_passwd}@localhost:${db_port}/db_hauslabor`);
 
 mongoose.Error.messages.general.required = "O atributo '{PATH}' é obrigatório."

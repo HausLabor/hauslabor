@@ -1,0 +1,173 @@
+{
+    "name": "José Footer of Cana",
+    "dtnasc": "01/01/1946",
+    "sex": "MASCULINO",
+    "birthplace": "Brasileiro",
+    "contacts": [
+        {
+            "type": 1,
+            "contact": "usuario@teste.com.br",
+            "status": true
+        },
+        {
+            "type": 2,
+            "contact": 999990000,
+            "status": true
+        }
+    ],
+    "documents": [
+        {
+            "rg": "123456789",
+            "cpf": "98765432",
+            "docSpecialist": [
+                {
+                    "type": "CRM",
+                    "registration": "1234-X",
+                    "specialist": "Clinico Geral"
+                }
+            ],
+            "status": true
+        }
+    ],
+    "addresses": [
+        {
+            "number": 256,
+            "city": "São Paulo",
+            "zipcode": "08665-210",
+            "status": true
+        },
+        {
+            "number": "256",
+            "city": "São Paulo",
+            "zipcode": "08665-210",
+            "status": 0
+        }
+    ],
+    "patient": {
+        "type": "ADMINISTRADOR",
+        "weight": 68,
+        "height": 1.77,
+        "profession": "Analista",
+        "illness": [
+            {
+                "type": "CARDIACO",
+                "description": "Miocardite",
+                "observation": "Inflamação no miocardio, ventriculo direito",
+                "status": true
+            },
+            {
+                "type": "RESPIRATORIO",
+                "description": "Pulmão",
+                "observation": "Implante de Pulmão",
+                "status": true
+            }
+        ],
+        "surgery": [
+            {
+                "type": "CARDIACO",
+                "description": "Nome da Cirurgia",
+                "observation": "Após a cirurgia começou a tomar o remédio X",
+                "status": true
+            }
+        ],
+        "addictions": [
+            {
+                "type": "BLABLABLA",
+                "description": "Alcoolismo Crônico",
+                "observation": "Alcoolatra à 20 anos.",
+                "status": true
+            }
+        ],
+        "drug": [
+            {
+                "type": "BLABLABLA",
+                "description": "Vicodin",
+                "observation": "Para diminuir a dor",
+                "othen": "1comp/3h",
+                "status": true
+            }
+        ],
+        "physicalactivity": [
+            {
+                "type": "OUTDOOR",
+                "description": "Crossfit",
+                "observation": "Corrida, escalada e levantamento de peso",
+                "othen": "2 vezes por semana",
+                "status": true
+            }
+        ],
+        "examinations": [
+            {
+                "type": "AUTOMATICO",
+                "description": "Glicemia",
+                "result": "450mg/l",
+                "lestactivity": "Almoço",
+                "datehour": "01/10/2017",
+                "observation": "Teste realizado em casa",
+                "notification": [
+                    {
+                        "type": "ESPECIALISTA",
+                        "description": "Excelente resultado!",
+                        "status": true
+                    },
+                    {
+                        "type": "PACIENTE",
+                        "description": "Sério!?",
+                        "status": true
+                    },
+                    {
+                        "type": "ESPECIALISTA",
+                        "description": "Não!",
+                        "status": true
+                    }
+                ],
+                "status": true
+            },
+            {
+                "type": "MANUAL",
+                "description": "Glicemia",
+                "result": "130mg/l",
+                "lestactivity": "Natação",
+                "datehour": "02/10/2017",
+                "observation": "Teste realizado em casa",
+                "notification": [
+                    {
+                        "type": "ESPECIALISTA",
+                        "description": "Você está curado!",
+                        "status": true
+                    },
+                    {
+                        "type": "PACIENTE",
+                        "description": "Sério!?",
+                        "status": true
+                    },
+                    {
+                        "type": "ESPECIALISTA",
+                        "description": "Não! kkkk",
+                        "status": true
+                    }
+                ],
+                "status": true
+            }
+        ],
+        "notifications": [
+            {
+                "type": "ESPECIALISTA",
+                "description": "Viva até morrer!",
+                "status": true
+            },
+            {
+                "type": "PACIENTE",
+                "description": "Falta muito?",
+                "status": true
+            },
+            {
+                "type": "ESPECIALISTA",
+                "description": "Não!",
+                "status": true
+            }
+        ],
+        "status": true
+    },
+    "status": true
+}
