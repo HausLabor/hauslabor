@@ -5,29 +5,31 @@
         'msgs',
         'tabs',
         'auth',
+        'consts',
         PersonController
     ])
 
-    function PersonController($http, $location, msgs, tabs, auth) {
+    function PersonController($http, $location, msgs, tabs, auth, consts) {
         const vm = this;
-        const url = 'http://localhost:3003/api/person';
-        const user = auth.getUser()
+        const url = `${consts.apiUrl}/person`;
+        const user = auth.getUser();
 
         vm.refresh = function () {
             const page = parseInt($location.search().page) || 1
-            //$http.get(`${url}?skip=${(page - 1) * 10}&limit=10/:id=${user._id}`).then(function(response) {
+            //$http.get(`${url}?skip=${(page - 1) * 10}&limit=10/${user._id}`).then(function(response) {
             $http.get(`${url}?email=${user.email}`).then(function (response) {
                 vm.patient = { addictions: [{status: true}], drugs: [{status: true}], illnesses: [{status: true}], physicalActivities: [{status: true}], surgeries: [{status: true}] };
-                vm.person = { contacts: [{status: true}], addresses: [{status: true}], patient: {}, type: '', name: user.name };
+                vm.person = { contacts: [{status: true}], addresses: [{status: true}], patient: {}, type: '', name: user.name, type: user.access };
                 vm.persons = response.data;
-                vm.isCompleteUser();
-                console.log(vm.persons)
+                vm.isSpecialist();
+                console.log(vm.persons);
+                console.log(user);
             });
-
             
             $http.get('http://localhost:3003/api/userSummary').then(function (response) {
                 vm.pages = Math.ceil(response.data.value / 10);
-                tabs.show(vm, { tabList: true, tabCreate: true });
+                vm.isCompleteUser();
+                tabs.show(vm, { tabCreate: true, tabDetail: true });
             });
         }
 
@@ -36,10 +38,9 @@
             vm.person.status = true;
             vm.person.patient.status = true;
 
-            console.log(vm.person)
-            console.log(vm.person.patient)
-
+            //$http.post(`${url}`, vm.person).then(function (response) {
             $http.post(`${url}?email=${user.email}`, vm.person).then(function (response) {
+                auth.completeUser();
                 vm.refresh();
                 msgs.addSuccess('Operação realizada com sucesso!!');
             }).catch(function (response) {
@@ -52,6 +53,7 @@
             vm.person.status = true;
             vm.person.patient.status = true;
 
+            //const updateUrl = `${url}/${vm.persons._id}`;
             const updateUrl = `${url}/${vm.persons._id}?email=${user.email}`;
             $http.put(updateUrl, vm.person).then(function (response) {
                 vm.refresh();
@@ -62,13 +64,25 @@
         }
 
         vm.delete = function () {
-            const deleteUrl = `${url}?email=${user.email}`
-            $http.delete(deleteUrl, vm.person).then(function (response) {
-                vm.refresh();
+            vm.person.patient = vm.patient;
+            vm.person.status = false;
+            vm.person.patient.status = false;
+
+            //const updateUrl = `${url}/${vm.persons._id}`;
+            const deletePersonUrl = `${url}/${vm.persons._id}?email=${user.email}`;
+            $http.put(deletePersonUrl, vm.person).then(function (response) {
                 msgs.addSuccess('Operação realizada com sucesso!');
             }).catch(function (response) {
                 msgs.addError(response.data.errors);
-            })
+            });
+            const deleteUserUrl = `${consts.apiUrl}/users/${user._id}`;
+            $http.put(deleteUserUrl, { 'status': false }).then(function (response) {
+                msgs.addSuccess('Operação realizada com sucesso!');
+            }).catch(function (response) {
+                msgs.addError(response.data.errors);
+            });
+
+            auth.logout(() => $location.path('/'));
         }
 
         vm.showTabUpdate = function (person) {
@@ -82,13 +96,18 @@
             vm.patient = person.patient;
             tabs.show(vm, { tabDelete: true });
         }
+        vm.showTabDetail = function (person) {
+            vm.person = person;
+            vm.patient = person.patient;
+            tabs.show(vm, { tabDetail: true });
+        }
         vm.showTabList = function () {
             tabs.show(vm, { tabList: true });
         }
 
         vm.isCompleteUser = () => {
             if(!user.completeUser){
-                vm.showTabList();
+                vm.showTabDetail(vm.persons);
             }
         }
 

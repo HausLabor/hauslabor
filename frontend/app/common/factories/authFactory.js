@@ -40,6 +40,15 @@
             if (callback) callback(null)
         }
 
+        function completeUser(){
+            const updateUser = `${consts.apiUrl}/users/${user._id}`;
+            $http.put(updateUser, { 'completeUser': true }).then(function (response) {
+                msgs.addSuccess('Operação realizada com sucesso!');
+            }).catch(function (response) {
+                msgs.addError(response.data.errors);
+            })
+        }
+
         function validateToken(token, callback) {
             if (token) {
                 $http.post(`${consts.oapiUrl}/validateToken`, { token })
@@ -58,6 +67,6 @@
             }
         }
 
-        return { signup, login, logout, getUser, validateToken }
+        return { signup, login, logout, getUser, validateToken, completeUser }
     }
 })();

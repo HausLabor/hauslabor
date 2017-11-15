@@ -1,6 +1,8 @@
 
 const _ = require('lodash');
+const db = require('../../config/database');
 const Person = require('./person');
+const userSummaryService = require('../userSummary/userSummaryService');
 
 //const userID = '';
 
@@ -14,9 +16,12 @@ const Person = require('./person');
     }
 })
 */
-//Person(userID).methods(['get', 'post', 'put', 'delete']);
-//Person(userID).updateOptions({new: true, runValidators: true});
-//Person(userID).after('post', sendErrorsOrNext).after('put', sendErrorsOrNext);
+
+//Person.methods(['get', 'post', 'put', 'delete']);
+//Person.updateOptions({new: true, runValidators: true});
+//Person.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext);
+
+//#############################################################################################################
 
 const getPerson = (req, res, next) =>{
     const userId = req.user._id.toString();
@@ -32,7 +37,7 @@ const getPerson = (req, res, next) =>{
     })
 }
 
-const postPerson = (req, res, next) =>{
+const createPerson = (req, res, next) =>{
     const userId = req.user._id.toString();
     const type = req.body.type || '';
     const name = req.body.name || '';
@@ -55,7 +60,7 @@ const postPerson = (req, res, next) =>{
             console.log(err)
             return sendErrorsFromDB(res, err);
         }else{   
-            console.log('saved to database');
+            console.log('Saved to database');
             return res.status(200).json(result);
         }
     })
@@ -78,32 +83,31 @@ const updatePerson = (req, res, next) =>{
     const newPerson = { type, name, dtnasc, sex, birthplace, contacts, documents, addresses, patient, status};
 
     console.log('UpdatePerson: '+ id)
-    //console.log(person)
-    
+    console.log(newPerson)    
     Person(userId).findById(id, function(err, person) {
         if(err){
             console.log('Error updating person: '+ err);
             sendErrorsFromDB(null, err);
         } else {
-            person = newPerson;
+            Person(userId).update({'_id': id },newPerson, {multi: true},function(err, result) {
+                if(err){
+                    console.log('Error updating person: '+ err);
+                    sendErrorsFromDB(null, err);
+                }else{
+                    return res.status(200).json(newPerson);
+                }
+            })
         }
-        Person(userId).update({'_id': id },person, {multi: true},function(err, result) {
-            if(err){
-                console.log('Error updating person: '+ err);
-                sendErrorsFromDB(null, err);
-            }else{
-                return res.status(200).json(person);
-            }
-        })
     })
 }
 
 const deletePerson = (req, res, next) =>{
     const userId = '' + req.user._id;
-    Person(userId).findOne({ 'status': true }, (err, person) => {
-        if(err) return sendErrorsOrNext;
-        res.json(person);
-    })
+
+    db.dropCollection(userId, function(err, result) {
+        if(err) return sendErrorsOrNext();
+        res.status(200).json(result);
+    });
 }
 
 //#############################################################################################################
@@ -133,4 +137,5 @@ function parseErrors(nodeRestfulErrors) {
 }
 
 
-module.exports = {getPerson, postPerson, updatePerson};
+module.exports = { getPerson, createPerson, updatePerson, deletePerson };
+//module.exports = Person;

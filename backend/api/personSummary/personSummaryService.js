@@ -5,7 +5,7 @@ const Person = require('../person/person');
 function getSummary(req, res) {
     const userId = '' + req.user._id;
     
-    Person(userId).aggregate({
+    Person.aggregate({
         $match: { status: true }
     }, {
             $project: { weight: "$patient.weight", height: "$patient.height" }
@@ -25,7 +25,7 @@ function getSummary(req, res) {
 function getExaminations(req, res) {
     const userId = '' + req.user._id;
 
-    Person(userId).aggregate({
+    Person.aggregate({
         $match: { status: true }
     }, {
             $project: { examinations: "$patient.examinations" }
@@ -43,7 +43,7 @@ function getExaminations(req, res) {
 function countExaminations(req, res) {
     const userId = '' + req.user._id;
 
-    Person(userId).aggregate({
+    Person.aggregate({
         $match: { status: true }
     }, {
             $project: { count: { $size: "$patient.examinations"} }

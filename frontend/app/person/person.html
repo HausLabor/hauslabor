@@ -3,9 +3,9 @@
 <section class="content">
     <div class="nav-tabs-custom" ng-controller="PersonCtrl as pCtrl">
         <ul class="nav nav-tabs">
-            <li ng-if="pCtrl.tabList" ng-class="{active: pCtrl.tabList}">
-                <a href data-target="#tabList" data-toggle="tab">
-                    <i class="fa fa-bars"></i> Lista
+            <li ng-if="pCtrl.tabDetail" ng-class="{active: pCtrl.tabList}">
+                <a href data-target="#tabDetail" data-toggle="tab">
+                   <i class="fa fa-file-text-o"></i> Detalhe
                 </a>
             </li>
             <li ng-if="pCtrl.tabCreate">
@@ -25,8 +25,8 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane" id="tabList" ng-include="'person/list.html'" 
-            ng-class="{active: pCtrl.tabList}" ng-if="pCtrl.tabList"></div>
+            <div class="tab-pane" id="tabDetail" ng-include="'person/detail.html'" 
+            ng-class="{active: pCtrl.tabDetail}" ng-if="pCtrl.tabDetail"></div>
             <div class="tab-pane" id="tabCreate" ng-include="'person/form.html'"
             ng-if="pCtrl.tabCreate"></div>
             <div class="tab-pane" id="tabUpdate" ng-include="'person/form.html'"

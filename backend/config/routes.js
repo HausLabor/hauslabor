@@ -27,17 +27,18 @@ module.exports = function(server) {
     const examService = require('../api/exam/examService');
     
     //*****Person Service Routers******
-    //personService('users').register(protectedApi, '/persons');
+    //personService.register(protectedApi, '/person');
     protectedApi.route('/person').get(userSummaryService.findUserID, personService.getPerson)
     //protectedApi.route('/GetIdPerson').get(personService.Person);
-    .post(userSummaryService.findUserID, personService.postPerson)
+    .post(userSummaryService.findUserID, personService.createPerson)
     protectedApi.route('/person/:id').get(userSummaryService.findUserID, personService.getPerson)
     .put(userSummaryService.findUserID, personService.updatePerson)
-    //.delete(userSummaryService.findUserID, personService.deletePerson)
-    protectedApi.route('/examinations').get(userSummaryService.findUserID, examService.getExamination)
-    protectedApi.route('/personAddExam/:id').put(userSummaryService.findUserID, examService.createExaminations);
-    protectedApi.route('/personUpdateExam/:id').put(userSummaryService.findUserID, examService.updateExaminations);
-    protectedApi.route('/personDeleteExam/:id').put(userSummaryService.findUserID, examService.deleteExaminations);
+    .delete(userSummaryService.findUserID, personService.deletePerson)
+    //protectedApi.route('/examinations').get(userSummaryService.findUserID, examService.getExamination)
+    //protectedApi.route('/personAddExam/:id').put(userSummaryService.findUserID, examService.createExaminations);
+    //protectedApi.route('/personUpdateExam/:id').put(userSummaryService.findUserID, examService.updateExaminations);
+    //protectedApi.route('/personDeleteExam/:id').put(userSummaryService.findUserID, examService.deleteExaminations);
+    
     //*****Person Summary Service Routers******
     protectedApi.route('/personSummary').get(userSummaryService.findUserID, personSummaryService.getSummary);
     protectedApi.route('/personSummaryExaminations').get(userSummaryService.findUserID, personSummaryService.getExaminations);
