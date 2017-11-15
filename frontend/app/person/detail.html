@@ -1,0 +1,250 @@
+<div role="form">
+    <div class="box-body">
+        <div class="col-lg-12">
+            <div class="box-body">
+                <p class="lead">Detalhe do Cadastro</p>
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-danger pull-right" ng-click="pCtrl.showTabDelete(pCtrl.persons)">
+                        <i class="fa fa-trash-o"></i></button>
+            <button class="btn btn-warning pull-right" ng-click="pCtrl.showTabUpdate(pCtrl.persons)">
+                            <i class="fa fa-pencil"></i></button>
+            <div role="form">
+                <div class="box-body">
+                    <div class="col-lg-12">
+                        <text id="typePerson" label="Tipo de Perfil" grid="12 6 4" text="{{ pCtrl.persons.type }}"></text>
+                        <text id="name" label="Nome" grid="12" text="{{ pCtrl.persons.name }}"></text>
+                        <text id="dtnasc" label="Data de Nascimento" grid="12 6 4" text="{{ pCtrl.persons.dtnasc }}"></text>
+                        <text id="sex" label="Sexo" grid="12 6 4" text="{{ pCtrl.persons.sex }}"></text>
+                        <text id="birthplace" label="Nacionalidade" grid="12 6 4" text="{{ pCtrl.persons.birthplace }}"></text>
+                        <text id="weight" label="Peso" grid="12 6 4" text="{{ pCtrl.patient.weight }}" ng-if="pCtrl.patientDocs"></text>
+                        <text id="height" label="Altura" grid="12 6 4" text="{{ pCtrl.patient.height }}" ng-if="pCtrl.patientDocs"></text>
+                        <text id="profession" label="Profissão" grid="12 6 4" text="{{ pCtrl.patient.profession }}" ng-if="pCtrl.patientDocs"></text>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <fieldset>
+                    <legend>Documentos</legend>
+                    <div class="col-xs-12">
+                        <text id="rg" label="RG" grid="12 6 4" text="{{ pCtrl.persons.documents.rg }}"></text>
+                        <text id="cpf" label="CPF" grid="12 6 4" text="{{ pCtrl.persons.documents.cpf }}"></text>
+                        <text id="type" label="Tipo de Especialista" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist.type }}" ng-if="pCtrl.specialistDocs"></text>
+                        <text id="restration" label="Número do Registro" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist.registration }}"
+                            ng-if="pCtrl.specialistDocs"></text>
+                        <text id="specialist" label="Especialidade" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist.specialist }}" ng-if="pCtrl.specialistDocs"></text>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-xs-12">
+                <fieldset>
+                    <legend>Contatos</legend>
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Contato</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="contact in pCtrl.persons.contacts">
+                                    <td>
+                                        <text id="contactType" grid="12 6 4" text="{{ contact.type }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="contact" gtid="12 6 4" text="{{ contact.contact }}"></text>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-xs-12">
+                <fieldset>
+                    <legend>Endereço</legend>
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Cidade</th>
+                                    <th>CEP</th>
+                                    <th>Número</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="address in pCtrl.persons.addresses">
+                                    <td>
+                                        <text id="city" grid="12 6 4" text="{{ address.city }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="zipcode" grid="12 6 4" text="{{ address.zipcode }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="number" grid="12 6 4" text="{{ address.number }}"></text>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Atividades Fisica</legend>
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Nome</th>
+                                    <th>Observação</th>
+                                    <th>Frequência</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="physicalActivity in pCtrl.persons.patient.physicalActivities">
+                                    <td>
+                                        <text id="physicalActivityType" grid="12 6 4" text="{{ physicalActivity.type }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="physicalActivityDescription" grid="12 6 4" text="{{ physicalActivity.description }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="physicalActivityObservation" grid="12 6 4" text="{{ physicalActivity.observation }}">
+                                    </td>
+                                    <td>
+                                        <text id="physicalActivityOthen" grid="12 6 4" text="{{ physicalActivity.othen }}">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Medicamentos</legend>
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Nome</th>
+                                    <th>Observação</th>
+                                    <th>Frequência</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="drug in pCtrl.persons.patient.drugs">
+                                    <td>
+                                        <text id="drugType" grid="12 6 4" text="{{ drug.type }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="drugDescription" gri="12 6 4" text="{{ drug.description }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="drugObservation" grid="12 6 4" text="{{ drug.observation }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="drugOthen" grid="12 6 4" text="{{ drug.othen }}"></text>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Doenças</legend>
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Nome</th>
+                                    <th>Observação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="illness in pCtrl.persons.patient.illnesses">
+                                    <td>
+                                        <text id="illnessType" grid="12 6 4" text="{{ illness.type }}">
+                                            </list-box>
+                                    </td>
+                                    <td>
+                                        <text id="illnessDescription" grid="12 6 4" text="{{ illness.description }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="illnessObservation" grid="12 6 4" text="{{ illness.observation }}">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Cirugias</legend>
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Nome</th>
+                                    <th>Observação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="surgery in pCtrl.persons.patient.surgeries">
+                                    <td>
+                                        <text id="surgeryType" grid="12 6 4" text="{{ surgery.type }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="surgeryDescription" grid="12 6 4" text="{{ surgery.description }}">
+                                    </td>
+                                    <td>
+                                        <text id="surgeryObservation" grid="12 6 4" text="{{ surgery.observation }}">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-xs-12" ng-if="pCtrl.patientDocs">
+                <fieldset>
+                    <legend>Vicíos</legend>
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Nome</th>
+                                    <th>Observação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="addiction in pCtrl.persons.patient.addictions">
+                                    <td>
+                                        <text id="addictionType" grid="12 6 4" text="{{ addiction.type }}"></text>
+                                    </td>
+                                    <td>
+                                        <text id="addictionDescription" grid="12 6 4" text="{{ addiction.description }}">
+                                    </td>
+                                    <td>
+                                        <text id="addictionObservation" grid="12 6 4" text="{{ addiction.observation }}">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
