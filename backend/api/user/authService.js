@@ -25,6 +25,7 @@ const update = (req, res, next) =>{
     const lastacess = Date() || '';
     const status = true; //req.body.status || ''
     const completeUser = false;
+    const privacyPolicy = req.body.privacyPolicy || false;
 
     if (!email.match(emailRegex)) {
         return res.status(400).send({
@@ -98,6 +99,7 @@ const signup = (req, res, next) => {
     const lastacess = Date() || '';
     const status = true; //req.body.status || ''
     const completeUser = false;
+    const privacyPolicy = req.body.privacyPolicy || '';
 
     if (!email.match(emailRegex)) {
         return res.status(400).send({

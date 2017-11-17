@@ -23,6 +23,7 @@
         vm.getUser = () => auth.getUser();
         
         vm.logout = () => {
+            auth.updateLastAcess();
             auth.logout(() => $location.path('/'));
             //console.log('Logout...');
         }

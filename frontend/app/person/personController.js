@@ -2,6 +2,7 @@
     angular.module('hauslabor').controller('PersonCtrl', [
         '$http',
         '$location',
+        '$filter',
         'msgs',
         'tabs',
         'auth',
@@ -9,11 +10,10 @@
         PersonController
     ])
 
-    function PersonController($http, $location, msgs, tabs, auth, consts) {
+    function PersonController($http, $location, $filter, msgs, tabs, auth, consts) {
         const vm = this;
         const url = `${consts.apiUrl}/person`;
         const user = auth.getUser();
-
         vm.refresh = function () {
             const page = parseInt($location.search().page) || 1
             //$http.get(`${url}?skip=${(page - 1) * 10}&limit=10/${user._id}`).then(function(response) {
@@ -22,6 +22,9 @@
                 vm.person = { contacts: [{status: true}], addresses: [{status: true}], patient: {}, type: '', name: user.name, type: user.access };
                 vm.persons = response.data;
                 vm.isSpecialist();
+                vm.persons.dtnasc = $filter('date')(vm.persons.dtnasc, 'dd/MM/yyyy');
+
+                console.log(vm.persons.dtnasc);
                 console.log(vm.persons);
                 console.log(user);
             });
