@@ -3,12 +3,12 @@
 <section class="content">
     <div class="nav-tabs-custom" ng-controller="PersonCtrl as pCtrl">
         <ul class="nav nav-tabs">
-            <li ng-if="pCtrl.tabDetail" ng-class="{active: pCtrl.tabList}">
+            <li ng-if="pCtrl.tabDetail" ng-class="{active: pCtrl.tabDetail}">
                 <a href data-target="#tabDetail" data-toggle="tab">
                    <i class="fa fa-file-text-o"></i> Detalhe
                 </a>
             </li>
-            <li ng-if="pCtrl.tabCreate">
+            <li ng-if="pCtrl.tabCreate" ng-class="{active: pCtrl.tabCreate}">
                 <a href data-target="#tabCreate" data-toggle="tab">
                     <i class="fa fa-plus"></i> Incluir
                 </a>
@@ -28,7 +28,7 @@
             <div class="tab-pane" id="tabDetail" ng-include="'person/detail.html'" 
             ng-class="{active: pCtrl.tabDetail}" ng-if="pCtrl.tabDetail"></div>
             <div class="tab-pane" id="tabCreate" ng-include="'person/form.html'"
-            ng-if="pCtrl.tabCreate"></div>
+            ng-class="{active: pCtrl.tabCreate}" ng-if="pCtrl.tabCreate"></div>
             <div class="tab-pane" id="tabUpdate" ng-include="'person/form.html'"
             ng-class="{active: pCtrl.tabUpdate}" ng-if="pCtrl.tabUpdate"></div>
             <div class="tab-pane" id="tabDelete" ng-include="'person/form.html'"

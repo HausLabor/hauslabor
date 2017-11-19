@@ -1,9 +1,10 @@
 <div role="form">
     <div class="box-body">
         <div class="col-lg-12">
-            <field id="name" label="Nome" grid="12" placeholder="Informe o Nome" model="pCtrl.person.name" readonly="pCtrl.tabDelete"></field>
-            <field id="dtnasc" label="Data de Nascimento" grid="12 6 4" type="text" mask="99/99/9999" model="pCtrl.person.dtnasc"
-                readonly="pCtrl.tabDelete"></field>
+            <field id="name" label="Nome" grid="12" placeholder="Informe o Nome" model="pCtrl.person.name" readonly="pCtrl.tabDelete" required></field>
+            
+            <field id="dtnasc1" label="Data de Nascimento" grid="12 6 4" type="text" mask="99/99/9999" model="pCtrl.person.dtnasc"
+                readonly="pCtrl.tabDelete" required></field>
             <div class="col-sm-12 col-lg-2">
                 <div class="form-group">
                     <label for="personSex">Sexo</label>
@@ -14,13 +15,13 @@
                 </div>
             </div>
             <field id="birthplace" label="Nacionalidade" grid="12 6 4" placeholder="Informe a Nacionalidade" model="pCtrl.person.birthplace"
-                readonly="pCtrl.tabDelete"></field>
+                readonly="pCtrl.tabDelete" required></field>
             <field id="weight" label="Peso" grid="12 6 4" placeholder="Informe o Peso em Kg" type="Number" model="pCtrl.patient.weight"
-                readonly="pCtrl.tabDelete" ng-if="pCtrl.patientDocs"></field>
+                readonly="pCtrl.tabDelete" ng-if="pCtrl.patientDocs" required></field>
             <field id="height" label="Altura" grid="12 6 4" placeholder="Informe a Altura em Metro" type="Number" model="pCtrl.patient.height"
-                readonly="pCtrl.tabDelete" ng-if="pCtrl.patientDocs"></field>
+                readonly="pCtrl.tabDelete" ng-if="pCtrl.patientDocs" required></field>
             <field id="profession" label="Profissão" grid="12 6 4" placeholder="Informe a Profissão" model="pCtrl.patient.profession"
-                readonly="pCtrl.tabDelete" ng-if="pCtrl.patientDocs"></field>
+                readonly="pCtrl.tabDelete" ng-if="pCtrl.patientDocs" required></field>
         </div>
 
         <div class="col-lg-12">
@@ -29,7 +30,7 @@
                 <div>
 
                     <field id="rg" label="RG" grid="12 6 4" placeholder="Informe o RG" model="pCtrl.person.documents.rg" readonly="pCtrl.tabDelete"></field>
-                    <field id="cpf" label="CPF" grid="12 6 4" placeholder="Informe o CPF" model="pCtrl.person.documents.cpf" readonly="pCtrl.tabDelete"></field>
+                    <field id="cpf" label="CPF" grid="12 6 4" placeholder="Informe o CPF" model="pCtrl.person.documents.cpf" readonly="pCtrl.tabDelete" required></field>
                     <field id="type" label="Tipo de Especialista" grid="12 6 4" placeholder="Biomédico Médico Enfermeiro Outros" model="pCtrl.person.documents.docSpecialist.type"
                         readonly="pCtrl.tabDelete" ng-if="pCtrl.specialistDocs"></field>
                     <field id="restration" label="Número do Registro" grid="12 6 4" placeholder="Informe o número do Registro" model="pCtrl.person.documents.docSpecialist.registration"

@@ -3,7 +3,8 @@ const mongoose = restful.mongoose; //Mapeamento da API REST
 
 //------- Estrutura de Contatos
 const contactsSchema = new mongoose.Schema({
-    type: { type: String, required: [true, 'Informe o tipo do contato!'] },//Type 0 -  / 1 - E-MAIL / 2 - CELULAR / 3 - FIXO
+    type: { type: String, required: [true, 'Informe o tipo do contato!'], 
+        uppercase: true, enum: ['EMERGENCIA', 'CELULAR', 'FIXO'] },//Type 0 -  / 1 - EMERGENCIA / 2 - CELULAR / 3 - FIXO
     contact: { type: String, required: [true, 'Informe o contato!'] },
     status: { type: Boolean, required: [true, 'Informe o Status do Contato!']} //Status True or False
 });

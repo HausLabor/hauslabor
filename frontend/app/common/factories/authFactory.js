@@ -15,7 +15,7 @@
         }
 
         function signup(user, callback) {
-            user.privacyPolicy = confirm('Estou de acordo com os termos de Politica de Privacidade!') //privacyPolicy();
+            user.privacyPolicy = confirm('Estou de acordo com os termos de Politica de Privacidade!'); //privacyPolicy();
             submit('signup', user, callback);
         }
 

@@ -9,7 +9,7 @@
         'consts',
         PersonController
     ])
-
+    
     function PersonController($http, $location, $filter, msgs, tabs, auth, consts) {
         const vm = this;
         const url = `${consts.apiUrl}/person`;
@@ -24,15 +24,12 @@
                 vm.isSpecialist();
                 vm.persons.dtnasc = $filter('date')(vm.persons.dtnasc, 'dd/MM/yyyy');
 
-                console.log(vm.persons.dtnasc);
                 console.log(vm.persons);
                 console.log(user);
+                vm.isCompleteUser();
             });
-            
             $http.get('http://localhost:3003/api/userSummary').then(function (response) {
                 vm.pages = Math.ceil(response.data.value / 10);
-                vm.isCompleteUser();
-                tabs.show(vm, { tabCreate: true, tabDetail: true });
             });
         }
 
@@ -104,13 +101,15 @@
             vm.patient = person.patient;
             tabs.show(vm, { tabDetail: true });
         }
-        vm.showTabList = function () {
-            tabs.show(vm, { tabList: true });
+        vm.showTabCreate = function () {
+            tabs.show(vm, { tabCreate: true });
         }
 
         vm.isCompleteUser = () => {
-            if(!user.completeUser){
+            if(user.completeUser){
                 vm.showTabDetail(vm.persons);
+            } else {
+                vm.showTabCreate();
             }
         }
 
@@ -125,9 +124,7 @@
                 vm.patientDocs = false;
             }
         }
-
-
-
+        
         //Botões das Listas
         vm.addContact = function (index) {
             vm.person.contacts.splice(index + 1, 0, {status: true});

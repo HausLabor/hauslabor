@@ -51,7 +51,7 @@ const update = (req, res, next) =>{
         } else if (user) {
             return res.status(400).send({ errors: ['Usuário já cadastrado.'] })
         } else {
-            const newUser = new User({ name, email, password: passwordHash, lastacess, access, completeUser, status }) //incluir os demais campos de cadastro do usuário
+            const newUser = new User({ name, email, password: passwordHash, lastacess, access, completeUser, privacyPolicy, status }) //incluir os demais campos de cadastro do usuário
             newUser.save(err => {
                 if (err) {
                     return sendErrorsFromDB(res, err);
@@ -74,8 +74,8 @@ const login = (req, res, next) => {
                 expiresIn: "1 day"
                 //expiresIn: "10 seconds"
             })
-            const { _id, name, email, lastacess, completeUser, access } = user;
-            res.json({ _id, name, email, completeUser, lastacess, access, token })
+            const { _id, name, email, lastacess, completeUser, privacyPolicy, access } = user;
+            res.json({ _id, name, email, completeUser, lastacess, access, privacyPolicy, token })
         } else {
             return res.status(400).send({ errors: ['Usuário/Senha inválidos'] })
         }
@@ -125,7 +125,7 @@ const signup = (req, res, next) => {
         } else if (user) {
             return res.status(400).send({ errors: ['Usuário já cadastrado.'] })
         } else {
-            const newUser = new User({ name, email, password: passwordHash, lastacess, access, completeUser, status }) //incluir os demais campos de cadastro do usuário
+            const newUser = new User({ name, email, password: passwordHash, lastacess, access, completeUser, privacyPolicy, status }) //incluir os demais campos de cadastro do usuário
             newUser.save(err => {
                 if (err) {
                     return sendErrorsFromDB(res, err);

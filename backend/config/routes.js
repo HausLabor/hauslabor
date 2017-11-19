@@ -17,7 +17,7 @@ module.exports = function(server) {
     const protectedApi = express.Router();
     server.use('/api', protectedApi);
     
-    //protectedApi.use(auth) //
+    protectedApi.use(auth) //
 
     //Routes of API
     const userService = require('../api/user/userService');
@@ -34,10 +34,10 @@ module.exports = function(server) {
     protectedApi.route('/person/:id').get(userSummaryService.findUserID, personService.getPerson)
     .put(userSummaryService.findUserID, personService.updatePerson)
     .delete(userSummaryService.findUserID, personService.deletePerson)
-    //protectedApi.route('/examinations').get(userSummaryService.findUserID, examService.getExamination)
-    //protectedApi.route('/personAddExam/:id').put(userSummaryService.findUserID, examService.createExaminations);
-    //protectedApi.route('/personUpdateExam/:id').put(userSummaryService.findUserID, examService.updateExaminations);
-    //protectedApi.route('/personDeleteExam/:id').put(userSummaryService.findUserID, examService.deleteExaminations);
+    protectedApi.route('/examinations').get(userSummaryService.findUserID, examService.getExamination)
+    protectedApi.route('/personAddExam/:id').put(userSummaryService.findUserID, examService.createExaminations);
+    protectedApi.route('/personUpdateExam/:id').put(userSummaryService.findUserID, examService.updateExaminations);
+    protectedApi.route('/personDeleteExam/:id').put(userSummaryService.findUserID, examService.deleteExaminations);
     
     //*****Person Summary Service Routers******
     protectedApi.route('/personSummary').get(userSummaryService.findUserID, personSummaryService.getSummary);
