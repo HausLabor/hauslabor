@@ -136,6 +136,5 @@ function parseErrors(nodeRestfulErrors) {
     return errors;
 }
 
-
 module.exports = { getPerson, createPerson, updatePerson, deletePerson };
 //module.exports = Person;

@@ -45,7 +45,7 @@ angular.module('hauslabor').config([
                         } else {
                             user.isValid = true
                             $http.defaults.headers.common.Authorization = user.token
-                            
+
                             if (user.completeUser == true) {
                                 console.log(user)
                                 if(user.access == 'PACIENTE'){

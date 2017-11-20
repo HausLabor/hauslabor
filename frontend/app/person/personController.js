@@ -124,7 +124,7 @@
                 vm.patientDocs = false;
             }
         }
-        
+
         //Botões das Listas
         vm.addContact = function (index) {
             vm.person.contacts.splice(index + 1, 0, {status: true});

@@ -45,6 +45,7 @@ const update = (req, res, next) =>{
     if (!bcrypt.compareSync(confirmPassword, passwordHash)) {
         return res.status(400).send({ errors: ['Senhas não conferem.'] })
     }
+  
     User.findOne({ email }, (err, user) => {
         if (err) {
             return sendErrorsFromDB(res, err)
@@ -126,6 +127,7 @@ const signup = (req, res, next) => {
             return res.status(400).send({ errors: ['Usuário já cadastrado.'] })
         } else {
             const newUser = new User({ name, email, password: passwordHash, lastacess, access, completeUser, privacyPolicy, status }) //incluir os demais campos de cadastro do usuário
+
             newUser.save(err => {
                 if (err) {
                     return sendErrorsFromDB(res, err);

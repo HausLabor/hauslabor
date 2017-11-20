@@ -67,7 +67,6 @@
                 msgs.addError(response.data.errors);
             })
         }
-
         function validateToken(token, callback) {
             if (token) {
                 $http.post(`${consts.oapiUrl}/validateToken`, { token })

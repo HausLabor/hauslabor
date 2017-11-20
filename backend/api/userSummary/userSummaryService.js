@@ -15,7 +15,7 @@ const findUserID = (req, res, next) => {
 
     const email = req.body.email || req.query.email || '';
     const emailRegex = /\S+@\S+\.\S+/;//validar o e-mail
-
+  
     if (!email.match(emailRegex)) {
         return res.status(400).send({
             errors: ['O e-mail informado está inválido']
