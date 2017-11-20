@@ -15,6 +15,7 @@
         }
 
         function signup(user, callback) {
+            user.privacyPolicy = confirm('Estou de acordo com os termos de Politica de Privacidade!'); //privacyPolicy();
             submit('signup', user, callback);
         }
 
@@ -40,6 +41,32 @@
             if (callback) callback(null)
         }
 
+        function completeUser(){
+            const updateUser = `${consts.apiUrl}/users/${user._id}`;
+            $http.put(updateUser, { 'completeUser': true }).then(function (response) {
+                msgs.addSuccess('Operação realizada com sucesso!');
+            }).catch(function (response) {
+                msgs.addError(response.data.errors);
+            })
+        }
+        
+        function privacyPolicy(user){
+            const updateUser = `${consts.apiUrl}/users/${user._id}`;
+            $http.put(updateUser, { 'privacyPolicy': user.privacyPolicy }).then(function (response) {
+                msgs.addSuccess('Operação realizada com sucesso!');
+            }).catch(function (response) {
+                msgs.addError(response.data.errors);
+            })
+        }
+
+        function updateLastAcess(){
+            const updateUser = `${consts.apiUrl}/users/${user._id}`;
+            $http.put(updateUser, { 'lastacess': Date() }).then(function (response) {
+                msgs.addSuccess('Operação realizada com sucesso!');
+            }).catch(function (response) {
+                msgs.addError(response.data.errors);
+            })
+        }
         function validateToken(token, callback) {
             if (token) {
                 $http.post(`${consts.oapiUrl}/validateToken`, { token })
@@ -58,6 +85,6 @@
             }
         }
 
-        return { signup, login, logout, getUser, validateToken }
+        return { signup, login, logout, getUser, validateToken, completeUser, updateLastAcess, privacyPolicy }
     }
 })();

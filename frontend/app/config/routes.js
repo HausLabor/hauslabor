@@ -45,9 +45,16 @@ angular.module('hauslabor').config([
                         } else {
                             user.isValid = true
                             $http.defaults.headers.common.Authorization = user.token
-                            
-                            if(user.completeUser){
-                                isAuthPage ? $window.location.href = '/' : $location.path('/exames')
+
+                            if (user.completeUser == true) {
+                                console.log(user)
+                                if(user.access == 'PACIENTE'){
+                                    isAuthPage ? $window.location.href = '/' : $location.path('/dashboardPaciente')
+                                } else if (user.access == 'ESPECIALISTA'){
+                                    isAuthPage ? $window.location.href = '/' : $location.path('/dashboardEspecialista')
+                                } else {
+                                    isAuthPage ? $window.location.href = '/' : $location.path('/exames')
+                                }
                             } else {
                                 isAuthPage ? $window.location.href = '/' : $location.path('/person')
                             }
