@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 //const db_passwd = '1234';
 //const db_user = 'root';
@@ -6,8 +7,9 @@ const mongoose = require('mongoose');
 const db_local = 'localhost';
 const db_name = 'db_hauslabor';
 
-
-module.exports = mongoose.connect(`mongodb://${db_local}/${db_name}`, {useMongoClient: true});
+const url = process.env.MONGOLAB_URI ? process.env.MONGOLAB_URI : `mongodb://${db_local}/${db_name}`;
+//const url = `mongodb://${db_local}/${db_name}`;
+module.exports = mongoose.connect(url, {useMongoClient: true});
 //module.exports = mongoose.connect(`mongodb://${db_user}:${db_passwd}@localhost:${db_port}/db_hauslabor`);
 
 mongoose.Error.messages.general.required = "O atributo '{PATH}' é obrigatório."
