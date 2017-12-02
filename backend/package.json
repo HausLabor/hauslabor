@@ -10,7 +10,7 @@
   "author": "Henrique Luiz",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-query-int": "^1.0.1",
@@ -25,6 +25,6 @@
     "nodemon": "^1.11.0"
   },
   "engines": {
-    "node": "9.2.0"
+    "node": ">=6.11.1"
   }
 }
