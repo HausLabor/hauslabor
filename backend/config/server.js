@@ -15,6 +15,10 @@ server.use(queryParser());
 
 server.listen(port, function() {
     console.log(`Backend is running on port ${port}.`);
+
+    //***Verificar se foi setado corretamente a variavel de ambiente***
+    //console.log(process.env.AUTH_SECRET); 
+    //console.log(process.env.MONGOLAB_URI);
 });
 
 module.exports = server;
