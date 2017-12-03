@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Backend
+ * 
+ * Module Server, inicia o backend e configura a porta que ficará escutando
+ * 
+ */
 // Port do server backend
 const port = 3003
 // Importando as dependencias

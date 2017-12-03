@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Frontend
+ * 
+ * Module responsável por lidar com os erros
+ * 
+ */
 (function () {
     angular.module('hauslabor').factory('handleResponseError', [
         '$q',

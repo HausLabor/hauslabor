@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Frontend
+ * 
+ * Module Controller responsável pelo tratamento de todas as requisições de Pessoa.
+ * 
+ */
 (function () {
     angular.module('hauslabor').controller('PersonCtrl', [
         '$http',
@@ -11,21 +17,22 @@
     ])
     
     function PersonController($http, $location, $filter, msgs, tabs, auth, consts) {
-        const vm = this;
+        const vm = this; //Recebe o scope corrente
         const url = `${consts.apiUrl}/person`;
-        const user = auth.getUser();
+        const user = auth.getUser(); //Recebe o usuário corrente
+
         vm.refresh = function () {
             const page = parseInt($location.search().page) || 1
-            //$http.get(`${url}?skip=${(page - 1) * 10}&limit=10/${user._id}`).then(function(response) {
+            
             $http.get(`${url}?email=${user.email}`).then(function (response) {
-                vm.patient = { addictions: [{status: true}], drugs: [{status: true}], illnesses: [{status: true}], physicalActivities: [{status: true}], surgeries: [{status: true}] };
+                //Create and set the objetcts Patient and Person
+                vm.patient = { addictions: [{status: true}], drugs: [{status: true}], illnesses: [{status: true}], physicalactivities: [{status: true}], surgeries: [{status: true}] };
                 vm.person = { contacts: [{status: true}], addresses: [{status: true}], patient: {}, type: '', name: user.name, type: user.access };
                 vm.persons = response.data;
                 vm.isSpecialist();
                 vm.persons.dtnasc = $filter('date')(vm.persons.dtnasc, 'dd/MM/yyyy');
-
-                console.log(vm.persons);
-                console.log(user);
+                //console.log(vm.persons);
+                //console.log(user);
                 vm.isCompleteUser();
             });
             $http.get('http://localhost:3003/api/userSummary').then(function (response) {
@@ -34,13 +41,18 @@
         }
 
         vm.create = function () {
-            vm.person.patient = vm.patient;
             vm.person.status = true;
-            vm.person.patient.status = true;
+            
+            if(vm.person.type == 'PACIENTE'){
+                vm.person.patient = vm.patient;
+                vm.person.patient.status = true;
+            }
+            //console.log(vm.person);
 
-            //$http.post(`${url}`, vm.person).then(function (response) {
             $http.post(`${url}?email=${user.email}`, vm.person).then(function (response) {
                 auth.completeUser();
+                user.completeUser = true;
+                vm.completeUser = true;
                 vm.refresh();
                 msgs.addSuccess('Operação realizada com sucesso!!');
             }).catch(function (response) {
@@ -49,11 +61,13 @@
         }
 
         vm.update = function () {
-            vm.person.patient = vm.patient;
             vm.person.status = true;
-            vm.person.patient.status = true;
+            
+            if(vm.person.type == 'PACIENTE'){
+                vm.person.patient = vm.patient;
+                vm.person.patient.status = true;
+            }
 
-            //const updateUrl = `${url}/${vm.persons._id}`;
             const updateUrl = `${url}/${vm.persons._id}?email=${user.email}`;
             $http.put(updateUrl, vm.person).then(function (response) {
                 vm.refresh();
@@ -64,11 +78,13 @@
         }
 
         vm.delete = function () {
-            vm.person.patient = vm.patient;
             vm.person.status = false;
-            vm.person.patient.status = false;
 
-            //const updateUrl = `${url}/${vm.persons._id}`;
+            if(vm.person.type == 'PACIENTE'){
+                vm.person.patient = vm.patient;
+                vm.person.patient.status = true;
+            }
+
             const deletePersonUrl = `${url}/${vm.persons._id}?email=${user.email}`;
             $http.put(deletePersonUrl, vm.person).then(function (response) {
                 msgs.addSuccess('Operação realizada com sucesso!');
@@ -85,6 +101,7 @@
             auth.logout(() => $location.path('/'));
         }
 
+        //Regras para mostrar abas do person.html
         vm.showTabUpdate = function (person) {
             vm.person = person;
             vm.patient = person.patient;
@@ -105,6 +122,7 @@
             tabs.show(vm, { tabCreate: true });
         }
 
+        //Verificar se o Usuário está com o cadastro finalizado
         vm.isCompleteUser = () => {
             if(user.completeUser){
                 vm.showTabDetail(vm.persons);
@@ -112,9 +130,8 @@
                 vm.showTabCreate();
             }
         }
-
-        vm.personType = [{ label: 'Paciente', value: 'PACIENTE' }, { label: 'Especialista', value: 'ESPECIALISTA' }]
-
+        
+        //Verificar se o Usuário é um Especialista
         vm.isSpecialist = () => {
             if (vm.person.type != 'ESPECIALISTA') {
                 vm.specialistDocs = false;
@@ -210,16 +227,16 @@
         }
 
         vm.addPhysicalActivity = function (index) {
-            vm.patient.physicalActivities.splice(index + 1, 0, {status: true});
+            vm.patient.physicalactivities.splice(index + 1, 0, {status: true});
         }
 
         vm.clonePhysicalActivity = function (index, { type, description, observation, othen, status }) {
-            vm.patient.physicalActivities.splice(index + 1, 0, { type, description, observation, othen, status })
+            vm.patient.physicalactivities.splice(index + 1, 0, { type, description, observation, othen, status })
         }
 
         vm.deletePhysicalActivity = function (index) {
-            if (vm.patient.physicalActivities.length > 1) {
-                vm.patient.physicalActivities.splice(index, 1);
+            if (vm.patient.physicalactivities.length > 1) {
+                vm.patient.physicalactivities.splice(index, 1);
             }
         }
 

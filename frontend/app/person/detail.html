@@ -30,10 +30,10 @@
                     <div class="col-xs-12">
                         <text id="rg" label="RG" grid="12 6 4" text="{{ pCtrl.persons.documents.rg }}"></text>
                         <text id="cpf" label="CPF" grid="12 6 4" text="{{ pCtrl.persons.documents.cpf }}"></text>
-                        <text id="type" label="Tipo de Especialista" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist.type }}" ng-if="pCtrl.specialistDocs"></text>
-                        <text id="restration" label="Número do Registro" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist.registration }}"
+                        <text id="type" label="Tipo de Especialista" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist[0].type }}" ng-if="pCtrl.specialistDocs"></text>
+                        <text id="restration" label="Número do Registro" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist[0].registration }}"
                             ng-if="pCtrl.specialistDocs"></text>
-                        <text id="specialist" label="Especialidade" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist.specialist }}" ng-if="pCtrl.specialistDocs"></text>
+                        <text id="specialist" label="Especialidade" grid="12 6 4" text="{{ pCtrl.persons.documents.docSpecialist[0].specialist }}" ng-if="pCtrl.specialistDocs"></text>
                     </div>
                 </fieldset>
             </div>
@@ -105,7 +105,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="physicalActivity in pCtrl.persons.patient.physicalActivities">
+                                <tr ng-repeat="physicalActivity in pCtrl.persons.patient.physicalactivities">
                                     <td>
                                         <text id="physicalActivityType" grid="12 6 4" text="{{ physicalActivity.type }}"></text>
                                     </td>

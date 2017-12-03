@@ -5,16 +5,14 @@
                     <th>Tipo</th>
                     <th>Descrição</th>
                     <th>Resultado</th>
-                    <th>Status</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="exam in eCtrl.examsDB | filter: true as results">
+                <tr ng-repeat="exam in eCtrl.examsDB | filter:{status:true}">
                     <td>{{:: exam.typeExam }}</td>
                     <td>{{:: exam.description }}</td>
                     <td>{{:: exam.result }}</td>
-                    <td>{{:: exam.status}}</td>
                     <td class="table-actions">
                         <button class="btn btn-warning" ng-click="eCtrl.showTabUpdate(exam)">
                             <i class="fa fa-pencil"></i></button>

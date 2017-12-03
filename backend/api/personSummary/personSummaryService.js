@@ -1,7 +1,13 @@
+/**
+ * Hauslabor - Backend
+ * 
+ * Module responsável por atender as requisições externas e direcionar para o banco
+ * 
+ */
 const _ = require('lodash');
 const Person = require('../person/person');
 
-//Função middleware
+//Função middleware coleta a altura, peso e calcula o IMC, retorna uma resposta com json
 function getSummary(req, res) {
     const userId = '' + req.user._id;
     
@@ -21,7 +27,7 @@ function getSummary(req, res) {
             }
         });
 }
-
+//Retornar um json com os exames já cadastrados
 function getExaminations(req, res) {
     const userId = '' + req.user._id;
 
@@ -35,11 +41,13 @@ function getExaminations(req, res) {
             if (error) {
                 res.status(500).json({ errors: [error] });
             } else {
+                console.log(result[0]);
                 res.json(_.defaults(result[0], { examinations: null }));
             }
         });
 }
 
+//Conta a quantidade de Exames a pessoa já cadastrou - utilizado na paginação
 function countExaminations(req, res) {
     const userId = '' + req.user._id;
 

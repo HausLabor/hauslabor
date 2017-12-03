@@ -1,3 +1,10 @@
+/**
+ * Hauslabor - Frontend
+ * 
+ * Module compilador do Frontend
+ * 
+ */
+
 const gulp = require('gulp');
 const util = require('gulp-util');
 const sequence = require('run-sequence');

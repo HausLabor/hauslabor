@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Frontend
+ * 
+ * Module responável por alterar o valor das flags tab
+ * 
+ */
 (function(){
     angular.module('hauslabor').factory('tabs', [ TabsFactory ])
 

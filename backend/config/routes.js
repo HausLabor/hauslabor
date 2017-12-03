@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Backend
+ * 
+ * Module responsável pelas rotas no backend
+ * 
+ */
 const express = require('express');
 const auth = require('./auth');
 const UserSummary = require('../api/userSummary/userSummaryService');
@@ -17,7 +23,7 @@ module.exports = function(server) {
     const protectedApi = express.Router();
     server.use('/api', protectedApi);
     
-    protectedApi.use(auth) //
+    protectedApi.use(auth) //Autenticação do Backend
 
     //Routes of API
     const userService = require('../api/user/userService');
@@ -52,35 +58,3 @@ module.exports = function(server) {
     //*****User Summary Service Routers******
     protectedApi.route('/userSummary').get(userSummaryService.countUser);
 }
-/*
-const express = require('express');
-
-module.exports = function(server) {
-
-    const router = express.Router();
-    server.use('/api', router);
-
-    
-    //Routes of API
-
-    //Routers of Person
-    const personService = require('../api/person/personService');
-    personService.register(router, '/persons');
-    
-    const personSummaryService = require('../api/personSummary/personSummaryService');
-    router.route('/personSummary').get(personSummaryService.getSummary);
-    router.route('/personSummaryExaminations').get(personSummaryService.getExaminations);
-    router.route('/personSummaryCountExaminations').get(personSummaryService.countExaminations);
-
-    //Routers of User
-    const userService = require('../api/user/userService');
-    userService.register(router, '/users');
-
-    const userSummaryService = require('../api/userSummary/userSummaryService');
-    router.route('/userSummary').get(userSummaryService.countUser);
-
-    router.route('/teste').get(function(req, res, next){
-        res.send('Funcionou!');
-    })
-}
-*/

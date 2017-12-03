@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Backend
+ * 
+ * Module responsável pela autenticação no backend
+ * 
+ */
 const jwt = require('jsonwebtoken');
 const env = require('../.env');
 
