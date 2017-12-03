@@ -1,26 +1,31 @@
-angular.module('hauslabor').config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    '$httpProvider',
-    function ($stateProvider, $urlRouterProvider, $httpProvider) {
-        $stateProvider.state('dashboardPaciente', {
-            url: "/dashboardPaciente",
-            templateUrl: "paciente/dashboard.html"
-        }).state('dashboardEspecialista', {
-            url: "/dashboardEspecialista",
-            templateUrl: "especialista/dashboard.html"
-        }).state('exames', {
-            url: "/exames",
-            templateUrl: "exames/exames.html"
-        }).state('person', {
-            url: "/person?page",
-            templateUrl: "person/person.html"
-        })
-        //$urlRouterProvider.otherwise('/dashboardPaciente')
-
-        $httpProvider.interceptors.push('handleResponseError');
-    }
-])
+/**
+ * Hauslabor - Frontend
+ * 
+ * Module responsável pelas rotas do fontend
+ * 
+ */
+    angular.module('hauslabor').config([
+        '$stateProvider',
+        '$urlRouterProvider',
+        '$httpProvider',
+        function ($stateProvider, $urlRouterProvider, $httpProvider) {
+            $stateProvider.state('dashboardPaciente', {
+                url: "/dashboardPaciente",
+                templateUrl: "paciente/dashboard.html"
+            }).state('dashboardEspecialista', {
+                url: "/dashboardEspecialista",
+                templateUrl: "especialista/dashboard.html"
+            }).state('exames', {
+                url: "/exames",
+                templateUrl: "exames/exames.html"
+            }).state('person', {
+                url: "/person?page",
+                templateUrl: "person/person.html"
+            })
+            //$urlRouterProvider.otherwise('/dashboardPaciente')
+            $httpProvider.interceptors.push('handleResponseError');
+        }
+    ])
     .run([
         '$rootScope',
         '$http',
@@ -45,7 +50,7 @@ angular.module('hauslabor').config([
                         } else {
                             user.isValid = true
                             $http.defaults.headers.common.Authorization = user.token
-
+                            
                             if (user.completeUser == true) {
                                 console.log(user)
                                 if(user.access == 'PACIENTE'){

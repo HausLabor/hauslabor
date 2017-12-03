@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Backend
+ * 
+ * Module responsável pela conexão com o Banco de Dados
+ * 
+ */
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
@@ -8,7 +14,6 @@ const db_local = 'localhost';
 const db_name = 'db_hauslabor';
 
 const url = process.env.MONGOLAB_URI ? process.env.MONGOLAB_URI : `mongodb://${db_local}/${db_name}`;
-//const url = `mongodb://${db_local}/${db_name}`;
 module.exports = mongoose.connect(url, {useMongoClient: true});
 //module.exports = mongoose.connect(`mongodb://${db_user}:${db_passwd}@localhost:${db_port}/db_hauslabor`);
 

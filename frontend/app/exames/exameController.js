@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Frontend
+ * 
+ * Module Exame Controller responsável pelo controle das interações da tela de exames
+ * 
+ */
 (function () {
     angular.module('hauslabor').controller('ExaminationCtrl', [
         '$http',
@@ -15,16 +21,16 @@
         vm.refresh = function () {
             const page = parseInt($location.search().page) || 1
             //$http.get(`${url}/person/?email=${user.email}?skip=${(page - 1) * 10}&limit=10/:id=${user._id}`).then(function(response) {
-            $http.get(`${url}person/?email=${user.email}`).then(function (response) {
+            $http.get(`${url}examinations/?email=${user.email}`).then(function (response) {
                 vm.exam = {};
                 vm.notification = {};
                 vm.person_id = response.data._id;
                 vm.person_type = response.data.type;
                 vm.patient_id = response.data.patient._id;
-                vm.examsDB = response.data.patient.examinations
-                console.log(vm.examsDB)
-                console.log(vm.person_id)
-                console.log(vm.person_type)
+                vm.examsDB = response.data.patient.examinations;
+                //console.log(vm.examsDB)
+                //console.log(vm.person_id)
+                //console.log(vm.person_type)
             });
             $http.get(`${url}personSummaryCountExaminations/?email=${user.email}`).then(function (response) {
                 vm.examPages = Math.ceil(response.data.count / 10);
@@ -96,6 +102,7 @@
             })
         }
         
+        //Controle das abas da tela
         vm.showTabUpdate = function (exam) {
             vm.exam = exam;
             tabs.show(vm, { tabUpdate: true });

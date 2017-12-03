@@ -1,25 +1,13 @@
-
+/**
+ * Hauslabor - Backend
+ * 
+ * Module responsável por atender as requisições externas e direcionar para o banco
+ * 
+ */
 const _ = require('lodash');
 const db = require('../../config/database');
 const Person = require('./person');
 const userSummaryService = require('../userSummary/userSummaryService');
-
-//const userID = '';
-
-/*User.route('partient', {
-    detail:true,
-    handler: function(req, res, next){
-        userID = UserSummary.findUserID(req.params.id['']);
-        console.log(req.params.id);
-        console.log(userID);
-        next();
-    }
-})
-*/
-
-//Person.methods(['get', 'post', 'put', 'delete']);
-//Person.updateOptions({new: true, runValidators: true});
-//Person.after('post', sendErrorsOrNext).after('put', sendErrorsOrNext);
 
 //#############################################################################################################
 
@@ -31,6 +19,7 @@ const getPerson = (req, res, next) =>{
         }else if(!person){
             return res.json(person = {});
         }else {
+            //console.log('Passou em getPerson')
             return res.json(person);
         }
 
@@ -47,14 +36,18 @@ const createPerson = (req, res, next) =>{
     const contacts = req.body.contacts || [];
     const documents = req.body.documents || {};
     const addresses = req.body.addresses || [];
-    const patient = req.body.patient || {};
     const status = true; 
-    patient.status = req.body.patient.status || '';
     documents.status = true;
+    let newPerson = {};
+
+    if(type == 'PACIENTE'){
+        const patient = req.body.patient || {};
+        patient.status = req.body.patient.status || '';
+        newPerson = { type, name, dtnasc, sex, birthplace, contacts, documents, addresses, patient, status};
+    }else{
+        newPerson = { type, name, dtnasc, sex, birthplace, contacts, documents, addresses, status};
+    }
     
-
-    const newPerson = { type, name, dtnasc, sex, birthplace, contacts: contacts, documents, addresses, patient, status};
-
     Person(userId).create(newPerson, (err, result) => {
         if(err){ 
             console.log(err)
@@ -77,10 +70,16 @@ const updatePerson = (req, res, next) =>{
     const contacts = req.body.contacts || [];
     const documents = req.body.documents || {};
     const addresses = req.body.addresses || [];
-    const patient = req.body.patient || {};
     const status = req.body.status || '';
-
-    const newPerson = { type, name, dtnasc, sex, birthplace, contacts, documents, addresses, patient, status};
+    let newPerson = {};
+    
+    if(type == 'PACIENTE'){
+        const patient = req.body.patient || {};
+        patient.status = req.body.patient.status || '';
+        newPerson = { type, name, dtnasc, sex, birthplace, contacts, documents, addresses, patient, status};
+    }else{
+        newPerson = { type, name, dtnasc, sex, birthplace, contacts, documents, addresses, status};
+    }
 
     console.log('UpdatePerson: '+ id)
     console.log(newPerson)    
@@ -111,7 +110,7 @@ const deletePerson = (req, res, next) =>{
 }
 
 //#############################################################################################################
-
+//Funções responsável em padronizar os retornos do banco e erros
 const sendErrorsFromDB = (res, dbErrors) => {
     const errors = [];
     _.forIn(dbErrors.errors, error => errors.push(error.message));
@@ -137,4 +136,3 @@ function parseErrors(nodeRestfulErrors) {
 }
 
 module.exports = { getPerson, createPerson, updatePerson, deletePerson };
-//module.exports = Person;

@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Backend
+ * 
+ * Module responsável por controlar as requisições externas e o banco
+ * 
+ */
 const _ = require('lodash');
 const Person = require('../person/person');
 
@@ -5,7 +11,7 @@ const Person = require('../person/person');
 
 const getExamination = (req, res, next) =>{
     const userId = ''+req.user._id;
-    Person(userId).find({ 'patient.examinations.status': true }, (err, person) => {
+    Person(userId).findOne({ 'status': true }, (err, person) => {
         if(err) {
             return sendErrorsOrNext
         }else if(!person){
@@ -93,6 +99,7 @@ const deleteExaminations= (req, res, next) => {
 
 //#############################################################################################################
 
+//Funções responsável em padronizar os retornos do banco e erros
 const sendErrorsFromDB = (res, dbErrors) => {
     const errors = [];
     _.forIn(dbErrors.errors, error => errors.push(error.message));

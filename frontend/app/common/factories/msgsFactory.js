@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Frontend
+ * 
+ * Module responsável pela padronização das mensagem
+ * 
+ */
 (function() {
     angular.module('hauslabor').factory('msgs', [
     'toastr',
@@ -16,14 +22,11 @@ function MsgsFactory(toastr) {
     
     function addMsg(msgs, title, method) {
         if(msgs instanceof Array) {
-            msgs.forEach(msg => toastr[method](msg, title));
+            msgs.forEach(msg => toastr[method](msg, title)); //Percorre o array da mensagem
         } else {
             toastr[method](msgs, title);
         }
-    }
-    
+    }    
     return { addSuccess, addError }
 }
-
-
 })();

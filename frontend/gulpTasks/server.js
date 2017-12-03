@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Frontend
+ * 
+ * Module compilador do Frontend - server
+ * 
+ */
 const gulp = require('gulp');
 const watch = require('gulp-watch');
 const webserver = require('gulp-webserver');

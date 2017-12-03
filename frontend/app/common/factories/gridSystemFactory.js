@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Frontend
+ * 
+ * Modulo responsável pelo parse da string em columns CSS
+ * 
+ */
 (function(){
     
     angular.module('hauslabor').factory('gridSystem', [function() {

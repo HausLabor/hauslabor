@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Backend
+ * 
+ * Module responsável por definir a estritura da collection User
+ * 
+ */
 const restful = require('node-restful');
 const mongoose = restful.mongoose; //Mapeamento da API REST
 

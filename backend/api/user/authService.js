@@ -1,3 +1,9 @@
+/**
+ * Hauslabor - Backend
+ * 
+ * Module responsável por atender as requisições externas e realizar a autenticação dos usuários
+ * 
+ */
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -7,9 +13,10 @@ const env = require('../../.env');
 const mongoose = require('mongoose');
 const conection = require('../../config/database');
 
-const emailRegex = /\S+@\S+\.\S+/;//validar o e-mail
-const passwordRegex = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,12})/; //validar a senha
+const emailRegex = /\S+@\S+\.\S+/; //validar o e-mail no padrão 'string@string.string'
+const passwordRegex = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,12})/; //validar a senha com um padrão forte, Letras(Aa), Numeros e Caracteres Especiais. 
 
+//Padroniza a mensagem de erro do Banco
 const sendErrorsFromDB = (res, dbErrors) => {
     const errors = [];
     _.forIn(dbErrors.errors, error => errors.push(error.message));
