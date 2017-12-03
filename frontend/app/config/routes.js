@@ -4,7 +4,6 @@
  * Module responsável pelas rotas do fontend
  * 
  */
-(function(){
     angular.module('hauslabor').config([
         '$stateProvider',
         '$urlRouterProvider',
@@ -70,4 +69,3 @@
             }
         }
     ]);
-})

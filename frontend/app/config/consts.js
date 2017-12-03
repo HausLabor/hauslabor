@@ -4,7 +4,6 @@
  * Module das constantes
  * 
  */
-(function(){
   angular.module('hauslabor').constant('consts', {
     appName: 'HausLabor',
     version: '1.0',
@@ -17,4 +16,3 @@
   }).run(['$rootScope', 'consts', function($rootScope, consts) {
     $rootScope.consts = consts
   }])
-})()
